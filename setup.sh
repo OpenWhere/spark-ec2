@@ -16,6 +16,7 @@ PUBLIC_DNS=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/host
 hostname $PRIVATE_DNS
 echo $PRIVATE_DNS > /etc/hostname
 export HOSTNAME=$PRIVATE_DNS  # Fix the bash built-in hostname variable too
+export HOST_DNS=$([ -n "$PUBLIC_DNS" ] && echo "$PUBLIC_DNS" || echo "$PRIVATE_DNS")
 
 echo "Setting up Spark on `hostname`..."
 
